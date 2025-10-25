@@ -29,7 +29,8 @@ body {
 
 .chat-list-header {
   padding: 20px;
-  background-color: #00a884;
+  /*background-color: #00a884;*/
+  background-color: blue;
   color: white;
   display: flex;
   justify-content: space-between;
