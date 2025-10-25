@@ -13,7 +13,8 @@ export default function MessageBubble({ message }) {
   };
 
   const hasButtons =
-    message.raw_payload?.buttons && Array.isArray(message.raw_payload.buttons);
+    message.options?.raw_payload?.buttons &&
+    Array.isArray(message.options.raw_payload.buttons);
 
   return (
     <div className={`message-bubble ${isIncoming ? "incoming" : "outgoing"}`}>
