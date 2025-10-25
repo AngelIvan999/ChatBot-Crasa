@@ -210,6 +210,41 @@ body {
   animation: fadeIn 0.3s ease-in;
 }
 
+.message-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.message-button {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #00a884;
+  cursor: not-allowed;
+  text-align: center;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.message-bubble.outgoing .message-button {
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #128c7e;
+}
+
+.message-button:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.message-content:has(.message-buttons) .message-text {
+  padding-bottom: 8px;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
