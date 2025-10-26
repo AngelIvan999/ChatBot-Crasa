@@ -1,36 +1,30 @@
-import { useChats } from "./hooks/useChats";
-import ChatList from "./components/ChatList";
-import ChatMessages from "./components/ChatMessages";
+import { useState } from "react";
+import Layout from "./components/layout/Layout";
+import ChatPage from "./pages/ChatPage";
+import DashboardPage from "./pages/DashboardPage";
+import PromotionsPage from "./pages/PromotionsPage";
 import "./App.css";
 
 function App() {
-  const { users, selectedUser, setSelectedUser, messages, loading, error } =
-    useChats();
+  const [currentPage, setCurrentPage] = useState("chats");
 
-  if (error) {
-    return (
-      <div className="error-container">
-        <h1>Error</h1>
-        <p>{error}</p>
-        <p>Verifica tu configuración de Supabase en el archivo .env</p>
-      </div>
-    );
-  }
+  const renderPage = () => {
+    switch (currentPage) {
+      case "chats":
+        return <ChatPage />;
+      case "dashboard":
+        return <DashboardPage />;
+      case "promotions":
+        return <PromotionsPage />;
+      default:
+        return <ChatPage />;
+    }
+  };
 
   return (
-    <div className="app">
-      <ChatList
-        users={users}
-        selectedUser={selectedUser}
-        onSelectUser={setSelectedUser}
-        loading={loading && !selectedUser}
-      />
-      <ChatMessages
-        user={selectedUser}
-        messages={messages}
-        loading={loading && selectedUser !== null}
-      />
-    </div>
+    <Layout currentPage={currentPage} onPageChange={setCurrentPage}>
+      {renderPage()}
+    </Layout>
   );
 }
 

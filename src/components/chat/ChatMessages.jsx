@@ -3,6 +3,7 @@ import { format, isSameDay } from "date-fns";
 import { es } from "date-fns/locale";
 import MessageBubble from "./MessageBubble";
 import UserInfo from "./UserInfo";
+import MessageInput from "./MessageInput";
 
 export default function ChatMessages({ user, messages, loading }) {
   const messagesEndRef = useRef(null);
@@ -42,6 +43,16 @@ export default function ChatMessages({ user, messages, loading }) {
 
   const messageGroups = groupMessagesByDate(messages);
 
+  const hasMessagesToday = () => {
+    if (!messages.length) return false;
+
+    const today = new Date();
+    return messages.some((msg) => {
+      const msgDate = new Date(msg.created_at);
+      return isSameDay(msgDate, today);
+    });
+  };
+
   return (
     <div className="chat-messages-container">
       <div className="chat-header">
@@ -78,6 +89,19 @@ export default function ChatMessages({ user, messages, loading }) {
           </>
         )}
       </div>
+
+      {/* Input solo si hay mensajes hoy */}
+      {hasMessagesToday() && (
+        <MessageInput
+          user={user}
+          onMessageSent={() => {
+            // Refrescar mensajes después de enviar
+            if (typeof window !== "undefined") {
+              window.location.reload();
+            }
+          }}
+        />
+      )}
     </div>
   );
 }
