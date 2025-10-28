@@ -11,6 +11,11 @@ export default function Sidebar({ currentPage, onPageChange }) {
       icon: "💬",
     },
     {
+      id: "customers",
+      label: "Clientes",
+      icon: "👥",
+    },
+    {
       id: "promotions",
       label: "Promociones",
       icon: "🎁",
@@ -22,7 +27,7 @@ export default function Sidebar({ currentPage, onPageChange }) {
       <div className="sidebar-header">
         <div className="sidebar-logo">
           <span className="logo-icon">🤖</span>
-          <h2 className="logo-text">ChatBot Manager</h2>
+          <h2 className="logo-text">Crasa ChatBot</h2>
         </div>
       </div>
 

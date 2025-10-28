@@ -3,6 +3,7 @@ import Layout from "./components/layout/Layout";
 import ChatPage from "./pages/ChatPage";
 import DashboardPage from "./pages/DashboardPage";
 import PromotionsPage from "./pages/PromotionsPage";
+import CustomersPage from "./pages/CustomersPage";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,9 @@ function App() {
         return <ChatPage />;
       case "dashboard":
         return <DashboardPage />;
+
+      case "customers":
+        return <CustomersPage />;
       case "promotions":
         return <PromotionsPage />;
       default:

@@ -18,13 +18,13 @@ export default function DashboardPage() {
       trend: "+5",
       trendUp: true,
     },
-    {
+    /*{
       title: "Tickets Pendientes",
       value: "12",
       icon: "🎫",
       trend: "-3",
       trendUp: false,
-    },
+    },*/
     {
       title: "Promociones Activas",
       value: "4",
