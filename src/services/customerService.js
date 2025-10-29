@@ -1,4 +1,4 @@
-import { supabase } from "./supabaseClient";
+import { supabase } from "../supabase/supabase.config";
 
 // Obtener todos los clientes
 export const getCustomers = async () => {

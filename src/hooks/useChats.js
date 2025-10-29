@@ -4,7 +4,7 @@ import {
   getChatHistory,
   subscribeToMessages,
   subscribeToUsers,
-} from "../services/supabaseClient";
+} from "../supabase/supabase.config";
 
 export const useChats = () => {
   const [users, setUsers] = useState([]);
