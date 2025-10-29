@@ -1,5 +1,4 @@
 export default function PromotionsList() {
-  // Datos de ejemplo - luego vendrán de la base de datos
   const promotions = [
     {
       id: 1,

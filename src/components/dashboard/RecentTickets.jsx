@@ -1,5 +1,4 @@
 export default function RecentTickets() {
-  // Datos de ejemplo - luego vendrán de la base de datos
   const tickets = [
     {
       id: "TKT-001",

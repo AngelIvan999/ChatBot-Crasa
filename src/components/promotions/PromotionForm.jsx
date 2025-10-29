@@ -26,7 +26,6 @@ export default function PromotionForm({ onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí irá la lógica para guardar la promoción
     console.log("Promoción guardada:", formData);
     alert("Promoción creada exitosamente (funcionalidad pendiente)");
   };

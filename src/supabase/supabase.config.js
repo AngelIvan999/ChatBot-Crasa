@@ -9,7 +9,6 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// Servicio para obtener todos los usuarios con su último mensaje
 export const getUsers = async () => {
   const { data, error } = await supabase
     .from("users")
@@ -20,7 +19,6 @@ export const getUsers = async () => {
   return data;
 };
 
-// Servicio para obtener el historial de chat de un usuario
 export const getChatHistory = async (userId) => {
   const { data, error } = await supabase
     .from("chat_history")
@@ -32,7 +30,6 @@ export const getChatHistory = async (userId) => {
   return data;
 };
 
-// Servicio para obtener información de un usuario específico
 export const getUser = async (userId) => {
   const { data, error } = await supabase
     .from("users")
@@ -44,7 +41,6 @@ export const getUser = async (userId) => {
   return data;
 };
 
-// Suscripción en tiempo real para nuevos mensajes
 export const subscribeToMessages = (userId, callback) => {
   return supabase
     .channel(`chat:${userId}`)
@@ -61,7 +57,6 @@ export const subscribeToMessages = (userId, callback) => {
     .subscribe();
 };
 
-// Suscripción para cambios en usuarios (nuevo último mensaje)
 export const subscribeToUsers = (callback) => {
   return supabase
     .channel("users")

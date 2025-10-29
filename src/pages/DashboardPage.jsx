@@ -2,7 +2,6 @@ import StatsCard from "../components/dashboard/StatsCard";
 import RecentTickets from "../components/dashboard/RecentTickets";
 
 export default function DashboardPage() {
-  // Datos de ejemplo - más tarde vendrán de la base de datos
   const stats = [
     {
       title: "Ventas Totales",

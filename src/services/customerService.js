@@ -1,6 +1,5 @@
 import { supabase } from "../supabase/supabase.config";
 
-// Obtener todos los clientes
 export const getCustomers = async () => {
   const { data, error } = await supabase
     .from("users")
@@ -11,7 +10,6 @@ export const getCustomers = async () => {
   return data;
 };
 
-// Crear un nuevo cliente
 export const createCustomer = async (customerData) => {
   const { data, error } = await supabase
     .from("users")
@@ -29,7 +27,6 @@ export const createCustomer = async (customerData) => {
   return data;
 };
 
-// Actualizar un cliente
 export const updateCustomer = async (id, customerData) => {
   const { data, error } = await supabase
     .from("users")
@@ -46,14 +43,12 @@ export const updateCustomer = async (id, customerData) => {
   return data;
 };
 
-// Eliminar un cliente
 export const deleteCustomer = async (id) => {
   const { error } = await supabase.from("users").delete().eq("id", id);
 
   if (error) throw error;
 };
 
-// Suscripción a cambios en tiempo real
 export const subscribeToCustomers = (callback) => {
   return supabase
     .channel("customers")

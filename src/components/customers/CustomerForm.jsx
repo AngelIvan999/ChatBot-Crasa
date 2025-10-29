@@ -14,7 +14,6 @@ export default function CustomerForm({ customer, onClose, onSuccess }) {
 
   useEffect(() => {
     if (customer) {
-      // Extraer el número sin el prefijo 521
       const phoneWithoutPrefix = customer.phone.startsWith("521")
         ? customer.phone.substring(3)
         : customer.phone;
@@ -70,7 +69,6 @@ export default function CustomerForm({ customer, onClose, onSuccess }) {
     setError(null);
 
     try {
-      // Agregar prefijo 521 al número
       const fullPhone = `521${formData.phone}`;
 
       const customerData = {

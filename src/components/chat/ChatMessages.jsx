@@ -28,7 +28,6 @@ export default function ChatMessages({ user, messages, loading }) {
     );
   }
 
-  // Agrupar mensajes por fecha
   const groupMessagesByDate = (messages) => {
     const groups = {};
     messages.forEach((message) => {
