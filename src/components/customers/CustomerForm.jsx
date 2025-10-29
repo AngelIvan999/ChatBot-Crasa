@@ -6,10 +6,10 @@ export default function CustomerForm({ customer, onClose, onSuccess }) {
     name: "",
     phone: "",
     startDate: "",
-    frequency: "Semanal",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [dateError, setDateError] = useState("");
   const [nextDate, setNextDate] = useState("");
 
   useEffect(() => {
@@ -22,14 +22,33 @@ export default function CustomerForm({ customer, onClose, onSuccess }) {
         name: customer.name || "",
         phone: phoneWithoutPrefix,
         startDate: customer.metadata?.startDate || "",
-        frequency: customer.metadata?.frequency || "Semanal",
       });
     }
   }, [customer]);
 
   useEffect(() => {
     calculateNextDate();
-  }, [formData.startDate, formData.frequency]);
+    validateDate();
+  }, [formData.startDate]);
+
+  const validateDate = () => {
+    if (!formData.startDate) {
+      setDateError("");
+      return false;
+    }
+
+    const selected = new Date(formData.startDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (selected <= today) {
+      setDateError("⚠️ La fecha de inicio debe ser posterior a hoy");
+      return false;
+    }
+
+    setDateError("");
+    return true;
+  };
 
   const calculateNextDate = () => {
     if (!formData.startDate) {
@@ -38,33 +57,26 @@ export default function CustomerForm({ customer, onClose, onSuccess }) {
     }
 
     const start = new Date(formData.startDate);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    start.setDate(start.getDate() + 7); // Siempre sumar 7 días (semanal)
+    setNextDate(start.toISOString().split("T")[0]);
+  };
 
-    let daysToAdd = 0;
-    switch (formData.frequency) {
-      case "Semanal":
-        daysToAdd = 7;
-        break;
-      case "Quincenal":
-        daysToAdd = 15;
-        break;
-      case "Mensual":
-        daysToAdd = 30;
-        break;
-    }
-
-    // Calcular la próxima fecha desde la fecha de inicio
-    let next = new Date(start);
-    while (next <= today) {
-      next.setDate(next.getDate() + daysToAdd);
-    }
-
-    setNextDate(next.toISOString().split("T")[0]);
+  const isFormValid = () => {
+    return (
+      formData.name.trim() !== "" &&
+      formData.phone.length === 10 &&
+      formData.startDate !== "" &&
+      !dateError
+    );
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isFormValid()) {
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -76,7 +88,7 @@ export default function CustomerForm({ customer, onClose, onSuccess }) {
         phone: fullPhone,
         metadata: {
           startDate: formData.startDate,
-          frequency: formData.frequency,
+          frequency: "Semanal", // Siempre semanal
           nextDate: nextDate,
         },
       };
@@ -94,6 +106,13 @@ export default function CustomerForm({ customer, onClose, onSuccess }) {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Obtener fecha mínima (mañana)
+  const getMinDate = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split("T")[0];
   };
 
   return (
@@ -140,48 +159,49 @@ export default function CustomerForm({ customer, onClose, onSuccess }) {
             <small className="input-hint">Ingresa 10 dígitos sin el +52</small>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="startDate">Fecha de Inicio</label>
-              <input
-                type="date"
-                id="startDate"
-                value={formData.startDate}
-                onChange={(e) =>
-                  setFormData({ ...formData, startDate: e.target.value })
-                }
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="frequency">Frecuencia de Pedido</label>
-              <select
-                id="frequency"
-                value={formData.frequency}
-                onChange={(e) =>
-                  setFormData({ ...formData, frequency: e.target.value })
-                }
-              >
-                <option value="Semanal">Semanal</option>
-                <option value="Quincenal">Quincenal</option>
-                <option value="Mensual">Mensual</option>
-              </select>
-            </div>
+          <div className="form-group">
+            <label htmlFor="startDate">Fecha de Inicio del Pedido *</label>
+            <input
+              type="date"
+              id="startDate"
+              className={`date-input ${dateError ? "input-error" : ""}`}
+              value={formData.startDate}
+              onChange={(e) =>
+                setFormData({ ...formData, startDate: e.target.value })
+              }
+              min={getMinDate()}
+              required
+            />
+            {dateError && <small className="error-hint">{dateError}</small>}
+            <small className="input-hint">
+              Debe ser una fecha futura (no hoy ni anteriores)
+            </small>
           </div>
 
-          {formData.startDate && (
-            <div className="form-group">
-              <label htmlFor="nextDate">Próxima Fecha de Corte</label>
-              <input
-                type="date"
-                id="nextDate"
-                value={nextDate}
-                disabled
-                className="input-disabled"
-              />
-              <small className="input-hint">
-                Se calcula automáticamente según la frecuencia
-              </small>
+          {formData.startDate && !dateError && (
+            <div className="dates">
+              <div className="next-date-preview">
+                <div className="preview-label">📅 Primer Pedido (Semanal)</div>
+                <div className="preview-date">
+                  {new Date(formData.startDate).toLocaleDateString("es-MX", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </div>
+              </div>
+              <div className="next-date-preview">
+                <div className="preview-label">📅 Próximo Pedido (Semanal)</div>
+                <div className="preview-date">
+                  {new Date(nextDate).toLocaleDateString("es-MX", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </div>
+              </div>{" "}
             </div>
           )}
 
@@ -194,7 +214,11 @@ export default function CustomerForm({ customer, onClose, onSuccess }) {
             >
               Cancelar
             </button>
-            <button type="submit" className="btn-primary" disabled={loading}>
+            <button
+              type="submit"
+              className="btn-primary"
+              disabled={loading || !isFormValid()}
+            >
               {loading
                 ? "Guardando..."
                 : customer

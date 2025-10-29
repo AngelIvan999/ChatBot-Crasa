@@ -1,22 +1,39 @@
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { deleteCustomer } from "../../services/customerService";
+import Swal from "sweetalert2";
 
 export default function CustomerList({ customers, loading, onEdit, onDelete }) {
   const handleDelete = async (customer) => {
-    if (
-      !window.confirm(
-        `¿Estás seguro de eliminar a ${customer.name || customer.phone}?`
-      )
-    ) {
-      return;
-    }
+    const result = await Swal.fire({
+      title: `¿Eliminar a ${customer.name || customer.phone}?`,
+      text: "Esta acción no se puede deshacer.",
+      icon: "warning",
+      //showCancelButton: true,
+      //confirmButtonColor: "#d33",
+      //cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, eliminar",
+      //cancelButtonText: "Cancelar",
+    });
+
+    if (!result.isConfirmed) return;
 
     try {
       await deleteCustomer(customer.id);
+      await Swal.fire({
+        icon: "success",
+        title: "Eliminado",
+        text: "El cliente ha sido eliminado correctamente.",
+        timer: 1800,
+        showConfirmButton: false,
+      });
       onDelete();
     } catch (error) {
-      alert("Error al eliminar cliente: " + error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Error al eliminar",
+        text: error.message,
+      });
     }
   };
 

@@ -1567,3 +1567,99 @@ body {
     transform: translateY(0);
   }
 }
+
+/* Date Input Styling */
+.date-input {
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+  width: 100%;
+  background: white;
+  color: #374151;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.date-input.input-error {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+.date-input.input-error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.error-hint {
+  font-size: 12px;
+  color: #dc2626;
+  margin-top: 4px;
+  display: block;
+  font-weight: 500;
+}
+
+.dates {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Next Date Preview */
+.next-date-preview {
+  background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+  border-left: 4px solid #3b82f6;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-top: 8px;
+  width: 45%;
+}
+
+.preview-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 8px;
+}
+
+.preview-date {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e3a8a;
+  text-transform: capitalize;
+}
+
+/* Botón deshabilitado mejorado */
+.btn-primary:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+.btn-primary:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Mejorar apariencia de input date en diferentes navegadores */
+.date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: opacity(0.5);
+}
+
+.date-input::-webkit-calendar-picker-indicator:hover {
+  filter: opacity(1);
+}
+
+/* Firefox */
+.date-input[type="date"]::-moz-focus-inner {
+  border: 0;
+}
