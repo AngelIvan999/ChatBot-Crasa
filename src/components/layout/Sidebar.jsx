@@ -1,4 +1,12 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../store/AuthStore";
+
 export default function Sidebar({ currentPage, onPageChange }) {
+  const [showMenu, setShowMenu] = useState(false);
+  const { cerrarSesion } = useAuthStore();
+  const navigate = useNavigate();
+
   const menuItems = [
     {
       id: "dashboard",
@@ -21,6 +29,11 @@ export default function Sidebar({ currentPage, onPageChange }) {
       icon: "🎁",
     },
   ];
+
+  const handleLogout = async () => {
+    await cerrarSesion();
+    navigate("/login");
+  };
 
   return (
     <aside className="sidebar">
@@ -51,7 +64,38 @@ export default function Sidebar({ currentPage, onPageChange }) {
             <p className="profile-name">Admin</p>
             <p className="profile-role">Administrador</p>
           </div>
+          <button
+            className="profile-menu-btn"
+            onClick={() => setShowMenu(!showMenu)}
+          >
+            ⋮
+          </button>
         </div>
+
+        {showMenu && (
+          <div className="profile-menu">
+            <button
+              className="profile-menu-item"
+              onClick={() => {
+                setShowMenu(false);
+                alert("Editar perfil (funcionalidad pendiente)");
+              }}
+            >
+              <span>✏️</span>
+              <span>Editar Perfil</span>
+            </button>
+            <button
+              className="profile-menu-item danger"
+              onClick={() => {
+                setShowMenu(false);
+                handleLogout();
+              }}
+            >
+              <span>🚪</span>
+              <span>Salir</span>
+            </button>
+          </div>
+        )}
       </div>
     </aside>
   );

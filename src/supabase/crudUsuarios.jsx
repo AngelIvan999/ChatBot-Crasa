@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { supabase } from "../supabase/supabase.config";
 
-const tabla = "usuarios";
+const tabla = "users";
 
 export async function ObtenerIdAuthSupabase() {
   const {
