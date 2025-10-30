@@ -1,20 +1,22 @@
 import StatsCard from "../components/dashboard/StatsCard";
 import RecentTickets from "../components/dashboard/RecentTickets";
+import { useState, useEffect } from "react";
+import { getSalesStats } from "../services/salesService";
 
 export default function DashboardPage() {
-  const stats = [
+  const [stats, setStats] = useState([
     {
       title: "Ventas Totales",
-      value: "245",
+      value: "0",
       icon: "💰",
-      trend: "+12%",
+      trend: "",
       trendUp: true,
     },
     {
       title: "Conversaciones Activas",
-      value: "38",
+      value: "0",
       icon: "💬",
-      trend: "+5",
+      trend: "",
       trendUp: true,
     },
     /*{
@@ -26,18 +28,70 @@ export default function DashboardPage() {
     },*/
     {
       title: "Promociones Activas",
-      value: "4",
+      value: "0",
       icon: "🎁",
-      trend: "+2",
+      trend: "",
       trendUp: true,
     },
-  ];
+  ]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadStats();
+  }, []);
+
+  const loadStats = async () => {
+    try {
+      const data = await getSalesStats();
+      setStats([
+        {
+          title: "Ventas Totales",
+          value: `$${data.totalSales.toLocaleString()}`,
+          icon: "💰",
+          trend: `${data.salesCount} ventas`,
+          trendUp: true,
+        },
+        {
+          title: "Conversaciones Activas",
+          value: String(data.activeChats),
+          icon: "💬",
+          trend: "Último mes",
+          trendUp: true,
+        },
+        {
+          title: "Promociones Activas",
+          value: String(data.activePromotions),
+          icon: "🎁",
+          trend: "+2",
+          trendUp: true,
+        },
+      ]);
+    } catch (error) {
+      console.error("Error cargando estadísticas:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="dashboard-page">
+        <div className="page-header">
+          <h1>Dashboard</h1>
+        </div>
+        <div className="loading-state">
+          <div className="spinner"></div>
+          <p>Cargando datos...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard-page">
       <div className="page-header">
         <h1>Dashboard</h1>
-        <p className="page-subtitle">Resumen general de tu chatbot y ventas</p>
+        <p className="page-subtitle">Resumen general de chatbot y ventas</p>
       </div>
 
       <div className="stats-grid">

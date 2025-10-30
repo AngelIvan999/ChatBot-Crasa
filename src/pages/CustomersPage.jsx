@@ -38,7 +38,7 @@ export default function CustomersPage() {
         <div>
           <h1>Clientes</h1>
           <p className="page-subtitle">
-            Gestiona tu lista de clientes y sus datos de contacto
+            Gestiona la lista de clientes y datos de contacto
           </p>
         </div>
         <button className="btn-primary" onClick={() => setShowForm(!showForm)}>

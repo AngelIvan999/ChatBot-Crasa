@@ -11,7 +11,7 @@ export default function PromotionsPage() {
         <div>
           <h1>Promociones</h1>
           <p className="page-subtitle">
-            Crea y gestiona plantillas de marketing para tus clientes
+            Crea y gestiona plantillas de marketing para los clientes
           </p>
         </div>
         <button className="btn-primary" onClick={() => setShowForm(!showForm)}>
