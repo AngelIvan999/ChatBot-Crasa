@@ -9,6 +9,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./hooks/ProtectedRoute";
 import { Routes, Route } from "react-router-dom";
 import { UserAuth } from "./context/AuthContext";
+import ProductsPage from "./pages/ProductsPage";
 import "./App.css";
 
 function AppContent() {
@@ -25,9 +26,10 @@ function AppContent() {
         return <ChatPage />;
       case "dashboard":
         return <DashboardPage />;
-
       case "customers":
         return <CustomersPage />;
+      case "products":
+        return <ProductsPage />;
       case "promotions":
         return <PromotionsPage />;
       default:
