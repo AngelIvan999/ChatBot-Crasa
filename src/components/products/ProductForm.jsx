@@ -18,7 +18,7 @@ export default function ProductForm({
   const [formData, setFormData] = useState({
     nombre_product: "",
     prc_menudeo: "",
-    pzs_caja: "",
+    cant_paquete: "",
   });
   const [selectedSabores, setSelectedSabores] = useState([]);
   const [showNewSaborForm, setShowNewSaborForm] = useState(false);
@@ -31,7 +31,7 @@ export default function ProductForm({
       setFormData({
         nombre_product: product.nombre_product || "",
         prc_menudeo: product.prc_menudeo || "",
-        pzs_caja: product.pzs_caja || "",
+        cant_paquete: product.cant_paquete || "",
       });
       loadProductSabores();
     }
@@ -92,8 +92,8 @@ export default function ProductForm({
       formData.nombre_product.trim() !== "" &&
       formData.prc_menudeo !== "" &&
       parseFloat(formData.prc_menudeo) > 0 &&
-      formData.pzs_caja !== "" &&
-      parseInt(formData.pzs_caja) > 0 &&
+      formData.cant_paquete !== "" &&
+      parseInt(formData.cant_paquete) > 0 &&
       selectedSabores.length > 0
     );
   };
@@ -117,7 +117,7 @@ export default function ProductForm({
       const productData = {
         nombre_product: formData.nombre_product.trim(),
         prc_menudeo: parseFloat(formData.prc_menudeo),
-        pzs_caja: parseInt(formData.pzs_caja),
+        cant_paquete: parseInt(formData.cant_paquete),
       };
 
       let savedProduct;
@@ -214,15 +214,15 @@ export default function ProductForm({
             </div>
 
             <div className="form-group">
-              <label htmlFor="pzs_caja">Piezas por Caja *</label>
+              <label htmlFor="cant_paquete">Piezas por Caja *</label>
               <input
                 type="number"
-                id="pzs_caja"
+                id="cant_paquete"
                 min="1"
                 placeholder="6"
-                value={formData.pzs_caja}
+                value={formData.cant_paquete}
                 onChange={(e) =>
-                  setFormData({ ...formData, pzs_caja: e.target.value })
+                  setFormData({ ...formData, cant_paquete: e.target.value })
                 }
                 required
               />

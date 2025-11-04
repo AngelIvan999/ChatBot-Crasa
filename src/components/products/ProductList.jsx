@@ -111,7 +111,7 @@ export default function ProductList({ products, loading, onEdit, onDelete }) {
                   <td className="customer-phone">
                     ${parseFloat(product.prc_menudeo).toFixed(2)}
                   </td>
-                  <td>{product.pzs_caja} piezas</td>
+                  <td>{product.cant_paquete} piezas</td>
                   <td>
                     <div className="sabores-list">
                       {productSabores[product.id] ? (

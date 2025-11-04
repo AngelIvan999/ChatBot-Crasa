@@ -18,7 +18,7 @@ export const createProduct = async (productData) => {
       {
         nombre_product: productData.nombre_product,
         prc_menudeo: productData.prc_menudeo,
-        pzs_caja: productData.pzs_caja,
+        cant_paquete: productData.cant_paquete,
       },
     ])
     .select()
@@ -34,7 +34,7 @@ export const updateProduct = async (id, productData) => {
     .update({
       nombre_product: productData.nombre_product,
       prc_menudeo: productData.prc_menudeo,
-      pzs_caja: productData.pzs_caja,
+      cant_paquete: productData.cant_paquete,
     })
     .eq("id", id)
     .select()
