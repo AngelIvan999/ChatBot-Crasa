@@ -43,6 +43,7 @@ export const getRecentSales = async (limit = 5) => {
       total_cents,
       status,
       created_at,
+      ticket_url,
       users:user_id (
         name,
         phone
@@ -57,6 +58,7 @@ export const getRecentSales = async (limit = 5) => {
   return data.map((sale) => ({
     id: `TKT-${String(sale.id).padStart(3, "0")}`,
     customer: sale.users?.name || "Usuario sin nombre",
+    ticket: sale.ticket_url || "No Hay Ticket",
     amount: `$${(sale.total_cents / 100).toFixed(2)}`,
     status: sale.status === "confirmed" ? "completado" : sale.status,
     date: new Date(sale.created_at).toLocaleDateString("es-MX", {

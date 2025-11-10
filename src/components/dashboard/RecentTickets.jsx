@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getRecentSales } from "../../services/salesService";
+import { Icon } from "@iconify/react";
 
 export default function RecentTickets() {
   const [tickets, setTickets] = useState([]);
@@ -57,7 +58,20 @@ export default function RecentTickets() {
               <tr key={ticket.id}>
                 <td className="ticket-id">{ticket.id}</td>
                 <td>{ticket.customer}</td>
-                <td>{ticket.product}</td>
+                <td>
+                  {ticket.ticket ? (
+                    <a
+                      href={`https://csmsgulzptwfpaoqonuc.supabase.co/storage/v1/object/public/tickets/${ticket.ticket}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-ver-factura"
+                    >
+                      <Icon icon="line-md:document-twotone" />
+                    </a>
+                  ) : (
+                    <span>-</span>
+                  )}
+                </td>
                 <td className="ticket-amount">{ticket.amount}</td>
                 <td>
                   <span
