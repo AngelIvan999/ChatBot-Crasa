@@ -82,7 +82,7 @@ export default function StockAlerts({ stockBajo, faltantes }) {
 
           {faltantes.length === 0 ? (
             <div className="empty-messages" style={{ padding: "20px" }}>
-              <p>✅ Stock suficiente para todos los pedidos</p>
+              <p>Nada que mostrar</p>
             </div>
           ) : (
             <div className="tickets-table">
