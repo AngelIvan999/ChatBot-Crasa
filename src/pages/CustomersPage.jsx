@@ -2,6 +2,7 @@ import { useState } from "react";
 import CustomerForm from "../components/customers/CustomerForm";
 import CustomerList from "../components/customers/CustomerList";
 import { useCustomers } from "../hooks/useCustomers";
+import Modal from "../components/common/Modal";
 
 export default function CustomersPage() {
   const [showForm, setShowForm] = useState(false);
@@ -46,15 +47,13 @@ export default function CustomersPage() {
         </button>
       </div>
 
-      {showForm && (
-        <div className="form-container">
-          <CustomerForm
-            customer={editingCustomer}
-            onClose={handleCloseForm}
-            onSuccess={handleSuccess}
-          />
-        </div>
-      )}
+      <Modal isOpen={showForm} onClose={handleCloseForm} size="medium">
+        <CustomerForm
+          customer={editingCustomer}
+          onClose={handleCloseForm}
+          onSuccess={handleSuccess}
+        />
+      </Modal>
 
       <CustomerList
         customers={customers}

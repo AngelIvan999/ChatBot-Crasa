@@ -1724,3 +1724,717 @@ body {
   font-size: 11px;
   padding: 3px 8px;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+  overflow-y: auto;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease-out;
+  margin: auto;
+}
+
+.modal-small {
+  width: 100%;
+  max-width: 500px;
+}
+
+.modal-medium {
+  width: 100%;
+  max-width: 800px;
+}
+
+.modal-large {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.modal-content {
+  padding: 32px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #6b7280;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content .customer-form-wrapper {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  max-width: 100%;
+}
+
+.modal-content .promotion-form-wrapper {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  grid-template-columns: 1fr;
+}
+
+.modal-content .form-section h2 {
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .modal-container {
+    max-height: 95vh;
+  }
+
+  .modal-content {
+    padding: 24px;
+  }
+
+  .modal-small,
+  .modal-medium,
+  .modal-large {
+    max-width: 100%;
+  }
+}
+
+/* Fix para inputs de tipo number - quitar flechas */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Mejorar inputs en general */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group textarea,
+.form-group select {
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+  background: white;
+  width: 100%;
+}
+
+/* Scrollbar personalizado más delgado y elegante */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Scrollbar para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+/* Modal específico - scrollbar más sutil */
+.modal-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 3px;
+}
+
+.modal-container::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* Grid de sabores con scrollbar sutil */
+.sabores-grid::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.sabores-grid::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.sabores-grid::-webkit-scrollbar-track {
+  background: #f9fafb;
+  border-radius: 3px;
+}
+
+/* Mejorar padding del modal para evitar corte visual */
+.modal-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease-out;
+  margin: auto;
+  /* Agregar padding para evitar corte del scrollbar */
+  padding-right: 4px;
+}
+
+/* Ajustar grid de sabores para mejor visualización */
+.sabores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+  max-height: 280px; /* Reducido un poco */
+  overflow-y: auto;
+  /* Agregar padding derecho para el scrollbar */
+  padding-right: 20px;
+}
+
+/* Mejorar checkboxes de sabores */
+.sabor-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  color: #374151;
+  user-select: none;
+}
+
+.sabor-checkbox:hover {
+  border-color: #3b82f6;
+  background: #f0f9ff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+}
+
+.sabor-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #3b82f6;
+  flex-shrink: 0;
+}
+
+.sabor-checkbox input[type="checkbox"]:checked + span {
+  font-weight: 600;
+  color: #1e40af;
+}
+
+/* Mejorar phone input container */
+.phone-input-container {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.phone-prefix {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.phone-input {
+  flex: 1;
+  border-radius: 0 8px 8px 0 !important;
+  border-left: 1px solid #d1d5db !important;
+}
+
+/* Fix para date inputs */
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background: #f3f4f6;
+}
+
+/* Mejorar selects */
+.form-group select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Hover states más sutiles */
+.form-group input:hover:not(:disabled),
+.form-group textarea:hover:not(:disabled),
+.form-group select:hover:not(:disabled) {
+  border-color: #9ca3af;
+}
+
+/* Estados disabled más claros */
+.form-group input:disabled,
+.form-group textarea:disabled,
+.form-group select:disabled {
+  background-color: #f9fafb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+}
+
+/* Mejorar modal overlay para evitar scroll visible */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+  overflow-y: auto;
+  /* Ocultar scrollbar del overlay */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.modal-overlay::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ajustar contenido del modal */
+.modal-content {
+  padding: 40px 32px 32px 32px; /* Más padding arriba para el botón X */
+}
+
+/* Mejorar botón de cerrar modal */
+.modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #f3f4f6;
+  border: none;
+  font-size: 20px;
+  color: #6b7280;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+  z-index: 10;
+  font-weight: 400;
+}
+
+.modal-close-btn:hover {
+  background: #e5e7eb;
+  color: #111827;
+  transform: scale(1.1);
+}
+
+/* Mejorar títulos de formularios */
+.form-section h2 {
+  font-size: 24px;
+  color: #111827;
+  margin-bottom: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Mejorar hints e inputs de error */
+.input-hint {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 6px;
+  display: block;
+  line-height: 1.4;
+}
+
+.error-hint {
+  font-size: 12px;
+  color: #dc2626;
+  margin-top: 6px;
+  display: block;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Mejorar char count */
+.char-count {
+  font-size: 12px;
+  color: #6b7280;
+  text-align: right;
+  margin-top: 6px;
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 32px 20px 20px 20px;
+  }
+
+  .sabores-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+    padding: 12px;
+    padding-right: 16px;
+  }
+
+  .form-section h2 {
+    font-size: 20px;
+  }
+}
+
+/* Animación suave para checkboxes */
+.sabor-checkbox input[type="checkbox"] {
+  transition: all 0.2s ease;
+}
+
+/* Mejorar form actions */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 1px solid #f3f4f6;
+}
+
+/* Fix para textarea */
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Mejorar labels */
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Placeholder mejorado */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+/* Estilos para Faltantes de Pedidos */
+.faltantes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.faltante-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.faltante-card:hover {
+  border-color: #dc2626;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
+}
+
+.faltante-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  gap: 12px;
+}
+
+.faltante-header:hover {
+  background: #fef2f2;
+}
+
+.faltante-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.faltante-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.faltante-cliente {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.faltante-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #6b7280;
+  flex-wrap: wrap;
+}
+
+.faltante-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.expand-btn {
+  background: #f3f4f6;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 12px;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.expand-btn:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.faltante-details {
+  padding: 0 16px 16px 16px;
+  border-top: 1px solid #f3f4f6;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.faltante-items-table {
+  width: 100%;
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.faltante-items-table thead th {
+  text-align: left;
+  padding: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  border-bottom: 2px solid #f3f4f6;
+  background: #f9fafb;
+}
+
+.faltante-items-table tbody td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+}
+
+.faltante-items-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.item-producto {
+  font-weight: 500;
+  color: #111827;
+}
+
+.item-cantidad {
+  color: #6b7280;
+}
+
+.item-disponible {
+  color: #f59e0b;
+  font-weight: 500;
+}
+
+.item-faltante {
+  font-weight: 600;
+}
+
+/* Responsive para faltantes */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .faltante-header {
+    padding: 12px;
+  }
+
+  .faltante-title {
+    font-size: 13px;
+  }
+
+  .faltante-cliente {
+    font-size: 13px;
+  }
+
+  .faltante-meta {
+    gap: 12px;
+    font-size: 11px;
+  }
+
+  .faltante-items-table {
+    font-size: 12px;
+  }
+
+  .faltante-items-table thead th {
+    padding: 6px 4px;
+    font-size: 10px;
+  }
+
+  .faltante-items-table tbody td {
+    padding: 8px 4px;
+  }
+}
+
+/* Ajuste para scrollbar de faltantes */
+.faltantes-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.faltantes-list::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 3px;
+}
+
+.faltantes-list::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}

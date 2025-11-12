@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PromotionForm from "../components/promotions/PromotionForm.jsx";
 import PromotionsList from "../components/promotions/PromotionList.jsx";
+import Modal from "../components/common/Modal";
 
 export default function PromotionsPage() {
   const [showForm, setShowForm] = useState(false);
@@ -19,11 +20,9 @@ export default function PromotionsPage() {
         </button>
       </div>
 
-      {showForm && (
-        <div className="form-container">
-          <PromotionForm onClose={() => setShowForm(false)} />
-        </div>
-      )}
+      <Modal isOpen={showForm} onClose={() => setShowForm(false)} size="large">
+        <PromotionForm onClose={() => setShowForm(false)} />
+      </Modal>
 
       <PromotionsList />
     </div>

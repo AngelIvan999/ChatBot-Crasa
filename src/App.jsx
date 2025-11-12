@@ -10,6 +10,7 @@ import { ProtectedRoute } from "./hooks/ProtectedRoute";
 import { Routes, Route } from "react-router-dom";
 import { UserAuth } from "./context/AuthContext";
 import ProductsPage from "./pages/ProductsPage";
+import StockPage from "./pages/StockPage";
 import "./App.css";
 
 function AppContent() {
@@ -32,6 +33,8 @@ function AppContent() {
         return <ProductsPage />;
       case "promotions":
         return <PromotionsPage />;
+      case "stock":
+        return <StockPage />;
       default:
         return <ChatPage />;
     }

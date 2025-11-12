@@ -1,27 +1,31 @@
 import { useState } from "react";
-import ProductForm from "../components/products/ProductForm";
-import ProductList from "../components/products/ProductList";
+import StockForm from "../components/stock/StockForm";
+import StockList from "../components/stock/StockList";
+import StockAlerts from "../components/stock/StockAlerts";
+import { useStock } from "../hooks/useStock";
 import { useProducts } from "../hooks/useProducts";
 import Modal from "../components/common/Modal";
 
-export default function ProductsPage() {
+export default function StockPage() {
   const [showForm, setShowForm] = useState(false);
-  const [editingProduct, setEditingProduct] = useState(null);
-  const { products, sabores, loading, error, refreshData } = useProducts();
+  const [editingStock, setEditingStock] = useState(null);
+  const { stock, stockBajo, faltantes, loading, error, refreshStock } =
+    useStock();
+  const { products, sabores } = useProducts();
 
-  const handleEdit = (product) => {
-    setEditingProduct(product);
+  const handleEdit = (stockItem) => {
+    setEditingStock(stockItem);
     setShowForm(true);
   };
 
   const handleCloseForm = () => {
     setShowForm(false);
-    setEditingProduct(null);
+    setEditingStock(null);
   };
 
   const handleSuccess = () => {
     handleCloseForm();
-    refreshData();
+    refreshStock();
   };
 
   if (error) {
@@ -37,30 +41,33 @@ export default function ProductsPage() {
     <div className="customers-page">
       <div className="page-header">
         <div>
-          <h1>Productos</h1>
+          <h1>Stock</h1>
           <p className="page-subtitle">
-            Gestiona el catálogo de productos y sus sabores disponibles
+            Gestiona el inventario disponible para surtir pedidos
           </p>
         </div>
         <button className="btn-primary" onClick={() => setShowForm(!showForm)}>
-          {showForm ? "❌ Cancelar" : "➕ Nuevo Producto"}
+          {showForm ? "❌ Cancelar" : "➕ Registrar Stock"}
         </button>
       </div>
 
       <Modal isOpen={showForm} onClose={handleCloseForm} size="medium">
-        <ProductForm
-          product={editingProduct}
-          saboresDisponibles={sabores}
+        <StockForm
+          stockItem={editingStock}
+          products={products}
+          sabores={sabores}
           onClose={handleCloseForm}
           onSuccess={handleSuccess}
         />
       </Modal>
 
-      <ProductList
-        products={products}
+      <StockAlerts stockBajo={stockBajo} faltantes={faltantes} />
+
+      <StockList
+        stock={stock}
         loading={loading}
         onEdit={handleEdit}
-        onDelete={refreshData}
+        onDelete={refreshStock}
       />
     </div>
   );
