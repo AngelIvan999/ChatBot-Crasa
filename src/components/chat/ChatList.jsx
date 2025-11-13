@@ -72,11 +72,7 @@ export default function ChatList({
                 </div>
               </div>
 
-              <ChatMenu
-                user={user}
-                onChatCleared={onRefresh}
-                onUserBlocked={onRefresh}
-              />
+              <ChatMenu user={user} onUserBlocked={onRefresh} />
             </div>
           ))
         )}

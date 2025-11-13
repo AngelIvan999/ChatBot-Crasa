@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 
-export default function ChatMenu({ user, onChatCleared, onUserBlocked }) {
+export default function ChatMenu({ user, onUserBlocked }) {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
@@ -21,56 +21,6 @@ export default function ChatMenu({ user, onChatCleared, onUserBlocked }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showMenu]);
-
-  const handleClearChat = async () => {
-    setShowMenu(false);
-
-    const result = await Swal.fire({
-      title: "¿Vaciar chat?",
-      text: `Se eliminarán todos los mensajes de ${user.name || user.phone}`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sí, vaciar",
-      cancelButtonText: "Cancelar",
-    });
-
-    if (!result.isConfirmed) return;
-
-    try {
-      const API_URL = (
-        import.meta.env.VITE_API_URL || "http://localhost:3000"
-      ).replace(/\/$/, "");
-      const response = await fetch(`${API_URL}/api/chat/${user.id}/clear`, {
-        method: "DELETE",
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Error al vaciar chat");
-      }
-
-      await Swal.fire({
-        icon: "success",
-        title: "Chat vaciado",
-        text: "Todos los mensajes han sido eliminados",
-        timer: 1500,
-        showConfirmButton: false,
-      });
-
-      // Notificar al componente padre con el userId
-      onChatCleared(user.id);
-    } catch (error) {
-      console.error("Error vaciando chat:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: error.message || "No se pudo vaciar el chat",
-      });
-    }
-  };
 
   const handleBlockUser = async () => {
     setShowMenu(false);
@@ -142,11 +92,6 @@ export default function ChatMenu({ user, onChatCleared, onUserBlocked }) {
 
       {showMenu && (
         <div className="chat-dropdown-menu">
-          <button className="chat-menu-item" onClick={handleClearChat}>
-            <span>🗑️</span>
-            <span>Vaciar chat</span>
-          </button>
-
           <button className="chat-menu-item danger" onClick={handleBlockUser}>
             <span>{user.metadata?.blocked ? "✅" : "🚫"}</span>
             <span>{user.metadata?.blocked ? "Desbloquear" : "Bloquear"}</span>
