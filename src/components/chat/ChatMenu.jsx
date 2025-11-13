@@ -39,7 +39,9 @@ export default function ChatMenu({ user, onChatCleared, onUserBlocked }) {
     if (!result.isConfirmed) return;
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const API_URL = (
+        import.meta.env.VITE_API_URL || "http://localhost:3000"
+      ).replace(/\/$/, "");
       const response = await fetch(`${API_URL}/api/chat/${user.id}/clear`, {
         method: "DELETE",
       });
@@ -58,7 +60,8 @@ export default function ChatMenu({ user, onChatCleared, onUserBlocked }) {
         showConfirmButton: false,
       });
 
-      onChatCleared();
+      // Notificar al componente padre con el userId
+      onChatCleared(user.id);
     } catch (error) {
       console.error("Error vaciando chat:", error);
       Swal.fire({
@@ -92,7 +95,9 @@ export default function ChatMenu({ user, onChatCleared, onUserBlocked }) {
     if (!result.isConfirmed) return;
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const API_URL = (
+        import.meta.env.VITE_API_URL || "http://localhost:3000"
+      ).replace(/\/$/, "");
       const response = await fetch(`${API_URL}/api/user/${user.id}/block`, {
         method: "POST",
         headers: {

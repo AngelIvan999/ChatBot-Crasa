@@ -11,7 +11,16 @@ export default function ChatPage() {
     loading,
     error,
     refreshUsers,
+    refreshMessages,
   } = useChats();
+
+  const handleChatCleared = (userId) => {
+    refreshUsers();
+
+    if (selectedUser?.id === userId) {
+      refreshMessages();
+    }
+  };
 
   if (error) {
     return (
@@ -30,7 +39,7 @@ export default function ChatPage() {
         selectedUser={selectedUser}
         onSelectUser={setSelectedUser}
         loading={loading && !selectedUser}
-        onRefresh={refreshUsers}
+        onRefresh={handleChatCleared}
       />
       <ChatMessages
         user={selectedUser}
