@@ -3,8 +3,15 @@ import ChatList from "../components/chat/ChatList";
 import ChatMessages from "../components/chat/ChatMessages";
 
 export default function ChatPage() {
-  const { users, selectedUser, setSelectedUser, messages, loading, error } =
-    useChats();
+  const {
+    users,
+    selectedUser,
+    setSelectedUser,
+    messages,
+    loading,
+    error,
+    refreshUsers,
+  } = useChats();
 
   if (error) {
     return (
@@ -23,6 +30,7 @@ export default function ChatPage() {
         selectedUser={selectedUser}
         onSelectUser={setSelectedUser}
         loading={loading && !selectedUser}
+        onRefresh={refreshUsers}
       />
       <ChatMessages
         user={selectedUser}

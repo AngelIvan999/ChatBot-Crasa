@@ -1,11 +1,13 @@
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
+import ChatMenu from "./ChatMenu";
 
 export default function ChatList({
   users,
   selectedUser,
   onSelectUser,
   loading,
+  onRefresh,
 }) {
   if (loading) {
     return (
@@ -42,25 +44,39 @@ export default function ChatList({
               }`}
               onClick={() => onSelectUser(user)}
             >
-              <div className="chat-avatar">
-                {user.name
-                  ? user.name.charAt(0).toUpperCase()
-                  : user.phone.charAt(0)}
-              </div>
-              <div className="chat-info">
-                <div className="chat-header-info">
-                  <h3>{user.name || "Usuario sin nombre"}</h3>
-                  {user.last_seen_at && (
-                    <span className="chat-time">
-                      {formatDistanceToNow(new Date(user.last_seen_at), {
-                        addSuffix: true,
-                        locale: es,
-                      })}
-                    </span>
+              <div
+                className="chat-item-content"
+                onClick={() => onSelectUser(user)}
+              >
+                <div className="chat-avatar">
+                  {user.name
+                    ? user.name.charAt(0).toUpperCase()
+                    : user.phone.charAt(0)}
+                  {user.metadata?.blocked && (
+                    <div className="blocked-indicator">🚫</div>
                   )}
                 </div>
-                <p className="chat-phone">{user.phone}</p>
+                <div className="chat-info">
+                  <div className="chat-header-info">
+                    <h3>{user.name || "Usuario sin nombre"}</h3>
+                    {user.last_seen_at && (
+                      <span className="chat-time">
+                        {formatDistanceToNow(new Date(user.last_seen_at), {
+                          addSuffix: true,
+                          locale: es,
+                        })}
+                      </span>
+                    )}
+                  </div>
+                  <p className="chat-phone">{user.phone}</p>
+                </div>
               </div>
+
+              <ChatMenu
+                user={user}
+                onChatCleared={onRefresh}
+                onUserBlocked={onRefresh}
+              />
             </div>
           ))
         )}
