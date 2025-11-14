@@ -24,13 +24,8 @@ export default function Sidebar({ currentPage, onPageChange }) {
       icon: "👥",
     },
     {
-      id: "stock",
-      label: "Stock",
-      icon: "📊",
-    },
-    {
-      id: "products",
-      label: "Productos",
+      id: "almacen",
+      label: "Almacen",
       icon: "📦",
     },
     {

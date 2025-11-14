@@ -1,11 +1,26 @@
 import { supabase } from "../supabase/supabase.config";
 
-// PRODUCTOS
-export const getProducts = async () => {
+export const getSabores = async () => {
   const { data, error } = await supabase
-    .from("products")
+    .from("sabores")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("nombre", { ascending: true });
+
+  if (error) throw error;
+  return data;
+};
+
+export const createSabor = async (saborData) => {
+  const { data, error } = await supabase
+    .from("sabores")
+    .insert([
+      {
+        nombre: saborData.nombre,
+        descripcion: saborData.descripcion || null,
+      },
+    ])
+    .select()
+    .single();
 
   if (error) throw error;
   return data;
@@ -49,34 +64,6 @@ export const deleteProduct = async (id) => {
   if (error) throw error;
 };
 
-// SABORES
-export const getSabores = async () => {
-  const { data, error } = await supabase
-    .from("sabores")
-    .select("*")
-    .order("nombre", { ascending: true });
-
-  if (error) throw error;
-  return data;
-};
-
-export const createSabor = async (saborData) => {
-  const { data, error } = await supabase
-    .from("sabores")
-    .insert([
-      {
-        nombre: saborData.nombre,
-        descripcion: saborData.descripcion || null,
-      },
-    ])
-    .select()
-    .single();
-
-  if (error) throw error;
-  return data;
-};
-
-// PRODUCTO_SABORES (relaciones)
 export const getProductoSabores = async (productId) => {
   const { data, error } = await supabase
     .from("producto_sabores")
@@ -111,19 +98,4 @@ export const deleteProductoSabor = async (productId, saborId) => {
     .eq("sabor_id", saborId);
 
   if (error) throw error;
-};
-
-export const subscribeToProducts = (callback) => {
-  return supabase
-    .channel("products")
-    .on(
-      "postgres_changes",
-      {
-        event: "*",
-        schema: "public",
-        table: "products",
-      },
-      callback
-    )
-    .subscribe();
 };

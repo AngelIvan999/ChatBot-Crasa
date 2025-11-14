@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import {
-  getProducts,
-  getSabores,
-  subscribeToProducts,
-} from "../services/productService";
+  getAlmacenCompleto,
+  subscribeToAlmacen,
+} from "../services/almacenService";
+import { getSabores } from "../services/productService";
 
-export const useProducts = () => {
-  const [products, setProducts] = useState([]);
+export const useAlmacen = () => {
+  const [almacen, setAlmacen] = useState([]);
   const [sabores, setSabores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,8 +16,7 @@ export const useProducts = () => {
   }, []);
 
   useEffect(() => {
-    const channel = subscribeToProducts((payload) => {
-      console.log("Cambio en productos:", payload);
+    const channel = subscribeToAlmacen(() => {
       loadData();
     });
 
@@ -29,15 +28,15 @@ export const useProducts = () => {
   const loadData = async () => {
     try {
       setLoading(true);
-      const [productsData, saboresData] = await Promise.all([
-        getProducts(),
+      const [almacenData, saboresData] = await Promise.all([
+        getAlmacenCompleto(),
         getSabores(),
       ]);
-      setProducts(productsData);
+      setAlmacen(almacenData);
       setSabores(saboresData);
       setError(null);
     } catch (err) {
-      console.error("Error cargando datos:", err);
+      console.error("Error cargando almacén:", err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -45,10 +44,10 @@ export const useProducts = () => {
   };
 
   return {
-    products,
+    almacen,
     sabores,
     loading,
     error,
-    refreshData: loadData,
+    refreshAlmacen: loadData,
   };
 };

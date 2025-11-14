@@ -9,8 +9,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./hooks/ProtectedRoute";
 import { Routes, Route } from "react-router-dom";
 import { UserAuth } from "./context/AuthContext";
-import ProductsPage from "./pages/ProductsPage";
-import StockPage from "./pages/StockPage";
+import AlmacenPage from "./pages/AlmacenPage";
 import "./App.css";
 
 function AppContent() {
@@ -29,12 +28,11 @@ function AppContent() {
         return <DashboardPage />;
       case "customers":
         return <CustomersPage />;
-      case "products":
-        return <ProductsPage />;
+      case "almacen":
+        return <AlmacenPage />;
       case "promotions":
         return <PromotionsPage />;
-      case "stock":
-        return <StockPage />;
+
       default:
         return <ChatPage />;
     }

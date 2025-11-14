@@ -72,7 +72,7 @@ export default function CustomerList({ customers, loading, onEdit, onDelete }) {
   return (
     <div className="customers-list">
       <div className="section-header">
-        <h2>📋 Lista de Clientes ({customers.length})</h2>
+        <h2>📋 Clientes ({customers.length})</h2>
       </div>
 
       {customers.length === 0 ? (

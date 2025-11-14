@@ -214,7 +214,7 @@ body {
 .btn-action {
   background: transparent;
   border: 1px solid #e5e7eb;
-  padding: 8px 12px;
+  padding: 4px 6px;
   border-radius: 6px;
   font-size: 13px;
   cursor: pointer;
@@ -2560,5 +2560,276 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 @media (max-width: 768px) {
   .chat-dropdown-menu {
     right: 10px;
+  }
+}
+
+/* Sabores Popover Styles - Versión Simplificada */
+.sabores-popover-container {
+  position: relative;
+  display: inline-block;
+}
+
+.sabores-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.sabores-trigger:hover {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border-color: #7dd3fc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.15);
+}
+
+.sabores-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.sabores-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e40af;
+  background: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Popover Box - Posicionamiento fijo */
+.sabores-popover-box {
+  position: fixed;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  min-width: 320px;
+  max-width: 400px;
+  z-index: 10000;
+  animation: popoverFadeIn 0.2s ease-out;
+  border: 2px solid #e5e7eb;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Header del Popover */
+.sabores-popover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 2px solid #f3f4f6;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 10px 10px 0 0;
+}
+
+.popover-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.popover-title span {
+  font-size: 20px;
+}
+
+.popover-title strong {
+  font-size: 15px;
+  color: #111827;
+}
+
+.popover-close-btn {
+  background: white;
+  border: 1px solid #e5e7eb;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6b7280;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.popover-close-btn:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #dc2626;
+  transform: scale(1.1);
+}
+
+/* Lista de Sabores */
+.sabores-popover-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.sabor-popover-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
+  transition: all 0.2s;
+}
+
+.sabor-popover-item:hover {
+  background: #f0f9ff;
+  border-color: #bae6fd;
+  transform: translateX(2px);
+}
+
+.sabor-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.sabor-nombre {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.sabor-status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.sabor-status.status-agotado {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.sabor-status.status-bajo {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.sabor-status.status-ok {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.sabor-stats {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.sabor-stock,
+.sabor-entradas {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sabor-stock strong,
+.sabor-entradas strong {
+  color: #111827;
+  font-weight: 600;
+}
+
+/* Footer del Popover */
+.sabores-popover-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-top: 2px solid #f3f4f6;
+  border-radius: 0 0 10px 10px;
+}
+
+.footer-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+}
+
+.footer-stat span {
+  color: #6b7280;
+}
+
+.footer-stat strong {
+  color: #111827;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Scrollbar del popover */
+.sabores-popover-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sabores-popover-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.sabores-popover-list::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+/* Ajuste para que la tabla no se mueva */
+.customers-table {
+  position: relative;
+}
+
+.customers-table table {
+  position: relative;
+}
+
+/* Asegurar que el popover no afecte el layout */
+.sabores-popover-box {
+  pointer-events: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sabores-popover-box {
+    min-width: 280px;
+    max-width: calc(100vw - 40px);
+  }
+
+  .sabores-popover-list {
+    max-height: 250px;
+  }
+
+  .sabores-popover-footer {
+    flex-direction: column;
+    gap: 8px;
   }
 }
