@@ -87,16 +87,6 @@ export default function Sidebar({ currentPage, onPageChange }) {
         {showMenu && !collapsed && (
           <div className="profile-menu">
             <button
-              className="profile-menu-item"
-              onClick={() => {
-                setShowMenu(false);
-                alert("Editar perfil (funcionalidad pendiente)");
-              }}
-            >
-              <span>✏️</span>
-              <span>Editar Perfil</span>
-            </button>
-            <button
               className="profile-menu-item danger"
               onClick={() => {
                 setShowMenu(false);
