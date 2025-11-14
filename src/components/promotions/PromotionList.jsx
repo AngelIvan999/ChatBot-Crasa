@@ -3,7 +3,7 @@ export default function PromotionsList() {
     {
       id: 1,
       title: "Promoción 2x1 JUMEX Uva",
-      message: "❗En la compra de 1 paquete de JUMEX Uva llévate el segundo...",
+      message: "❗En la compra de 1 paquete de JUMEX Uva llevate el segundo...",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJhLL6H3D1Q1kFNBzMyl7WwxnnZhZbxkNkhg&s",
       status: "activa",

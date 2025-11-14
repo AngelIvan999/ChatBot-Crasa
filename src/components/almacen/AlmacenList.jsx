@@ -1,8 +1,15 @@
 import { deleteProduct } from "../../services/productService";
 import Swal from "sweetalert2";
 import SaboresPopover from "./SaboresPopover";
+import { useNavigate } from "react-router-dom";
 
 export default function AlmacenList({ almacen, loading, onEdit, onDelete }) {
+  const navigate = useNavigate();
+
+  const handleShowHistory = (product) => {
+    navigate(`/almacen/${product.id}/historial`);
+  };
+
   const handleDelete = async (product) => {
     const result = await Swal.fire({
       title: `¿Eliminar "${product.nombre_product}"?`,
@@ -41,7 +48,7 @@ export default function AlmacenList({ almacen, loading, onEdit, onDelete }) {
       <div className="customers-list">
         <div className="loading-state">
           <div className="spinner"></div>
-          <p>Cargando almacén...</p>
+          <p>Cargando almacen...</p>
         </div>
       </div>
     );
@@ -114,6 +121,13 @@ export default function AlmacenList({ almacen, loading, onEdit, onDelete }) {
                     </td>
                     <td>
                       <div className="table-actions">
+                        <button
+                          className="btn-action"
+                          onClick={() => handleShowHistory(product)}
+                          title="Ver historial de entradas"
+                        >
+                          📊
+                        </button>
                         <button
                           className="btn-action"
                           onClick={() => onEdit(product)}

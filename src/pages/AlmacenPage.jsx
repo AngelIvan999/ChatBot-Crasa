@@ -41,7 +41,7 @@ export default function AlmacenPage() {
     <div className="customers-page">
       <div className="page-header">
         <div>
-          <h1>Almacén</h1>
+          <h1>Almacen</h1>
           <p className="page-subtitle">
             Gestiona productos, sabores y control de inventario
           </p>

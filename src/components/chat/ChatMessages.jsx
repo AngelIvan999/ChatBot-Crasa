@@ -94,7 +94,7 @@ export default function ChatMessages({ user, messages, loading }) {
         <MessageInput
           user={user}
           onMessageSent={() => {
-            // Refrescar mensajes después de enviar
+            // Refrescar mensajes despues de enviar
             if (typeof window !== "undefined") {
               window.location.reload();
             }

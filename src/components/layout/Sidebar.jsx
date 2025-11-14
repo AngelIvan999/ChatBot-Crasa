@@ -1,34 +1,30 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuthStore } from "../../store/AuthStore";
-import {
-  Menu,
-  X,
-  ChevronsLeft,
-  ChevronsRight,
-  PanelLeftClose,
-  PanelLeftOpen,
-  ChevronRight,
-  ChevronLeft,
-} from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
-export default function Sidebar({ currentPage, onPageChange }) {
+export default function Sidebar() {
   const [showMenu, setShowMenu] = useState(false);
   const [collapsed, setCollapsed] = useState(true);
   const { cerrarSesion } = useAuthStore();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: "📊" },
-    { id: "chats", label: "Conversaciones", icon: "💬" },
-    { id: "customers", label: "Clientes", icon: "👥" },
-    { id: "almacen", label: "Almacen", icon: "📦" },
-    { id: "promotions", label: "Promociones", icon: "🎁" },
+    { id: "dashboard", label: "Dashboard", icon: "📊", path: "/dashboard" },
+    { id: "chats", label: "Conversaciones", icon: "💬", path: "/chats" },
+    { id: "customers", label: "Clientes", icon: "👥", path: "/customers" },
+    { id: "almacen", label: "Almacen", icon: "📦", path: "/almacen" },
+    { id: "promotions", label: "Promociones", icon: "🎁", path: "/promotions" },
   ];
 
   const handleLogout = async () => {
     await cerrarSesion();
     navigate("/login");
+  };
+
+  const isActive = (path) => {
+    return location.pathname.startsWith(path);
   };
 
   return (
@@ -55,8 +51,8 @@ export default function Sidebar({ currentPage, onPageChange }) {
         {menuItems.map((item) => (
           <button
             key={item.id}
-            className={`nav-item ${currentPage === item.id ? "active" : ""}`}
-            onClick={() => onPageChange(item.id)}
+            className={`nav-item ${isActive(item.path) ? "active" : ""}`}
+            onClick={() => navigate(item.path)}
             title={collapsed ? item.label : ""}
           >
             <span className="nav-icon">{item.icon}</span>

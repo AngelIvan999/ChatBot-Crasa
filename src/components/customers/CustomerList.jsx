@@ -87,7 +87,7 @@ export default function CustomerList({ customers, loading, onEdit, onDelete }) {
             <thead>
               <tr>
                 <th>Nombre</th>
-                <th>Teléfono</th>
+                <th>Telefono</th>
                 <th>Fecha de Inicio</th>
                 <th>Frecuencia</th>
                 <th>Próximo Corte</th>

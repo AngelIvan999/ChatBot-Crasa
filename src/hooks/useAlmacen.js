@@ -36,7 +36,7 @@ export const useAlmacen = () => {
       setSabores(saboresData);
       setError(null);
     } catch (err) {
-      console.error("Error cargando almacén:", err);
+      console.error("Error cargando almacen:", err);
       setError(err.message);
     } finally {
       setLoading(false);

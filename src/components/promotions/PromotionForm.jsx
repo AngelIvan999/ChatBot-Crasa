@@ -83,7 +83,7 @@ export default function PromotionForm({ onClose }) {
             <textarea
               id="message"
               rows="6"
-              placeholder="Ej: ❗En la compra de 1 paquete de jugosa llévate el segundo completamente gratis ❗🤩"
+              placeholder="Ej: ❗En la compra de 1 paquete de jugosa llevate el segundo completamente gratis ❗🤩"
               value={formData.message}
               onChange={(e) =>
                 setFormData({ ...formData, message: e.target.value })

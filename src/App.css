@@ -3005,3 +3005,362 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     gap: 8px;
   }
 }
+
+/* Stock History Modal Styles */
+.stock-history-modal {
+  padding: 0;
+}
+
+.stock-history-modal h2 {
+  font-size: 24px;
+  color: #111827;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-info-header {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  border-left: 4px solid #3b82f6;
+}
+
+.product-info-header h3 {
+  font-size: 20px;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.product-stats {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #6b7280;
+  flex-wrap: wrap;
+}
+
+.product-stats span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sabores-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.sabor-section {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sabor-section-header {
+  background: #f9fafb;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.sabor-section-header h4 {
+  font-size: 16px;
+  color: #111827;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.total-badge {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.entries-table {
+  overflow-x: auto;
+}
+
+.entries-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.entries-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.entries-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #374151;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.entries-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.entries-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.entry-id {
+  color: #6b7280;
+  font-weight: 500;
+  font-family: monospace;
+}
+
+.entry-time {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .product-stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sabores-sections {
+    max-height: 50vh;
+  }
+
+  .entries-table th,
+  .entries-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .sabor-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* Page Transitions & Animations */
+.page-container {
+  animation: pageSlideIn 0.3s ease-out;
+}
+
+@keyframes pageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Stock History Page */
+.stock-history-page {
+  animation: pageSlideIn 0.3s ease-out;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 16px;
+}
+
+.btn-back:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  transform: translateX(-2px);
+}
+
+.stock-history-content {
+  padding: 40px 40px 40px 40px;
+}
+
+.product-info-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 18px;
+  color: #111827;
+  font-weight: 600;
+}
+
+.info-value.highlight {
+  color: #3b82f6;
+  font-size: 24px;
+}
+
+.sabores-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sabor-section {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.sabor-section:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.sabor-section-header {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #bae6fd;
+}
+
+.sabor-section-header h3 {
+  font-size: 18px;
+  color: #111827;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.total-badge {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.entries-table {
+  overflow-x: auto;
+}
+
+.entries-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.entries-table th {
+  text-align: left;
+  padding: 16px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.entries-table td {
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #374151;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.entries-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.entries-table tbody tr {
+  transition: background 0.2s;
+}
+
+.entries-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.entry-id {
+  color: #6b7280;
+  font-weight: 600;
+  font-family: "Courier New", monospace;
+}
+
+.entry-time {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .stock-history-content {
+    padding: 0 20px 20px 20px;
+  }
+
+  .product-info-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .sabor-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .entries-table th,
+  .entries-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+}

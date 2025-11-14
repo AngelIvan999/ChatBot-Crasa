@@ -139,3 +139,29 @@ export const subscribeToAlmacen = (callback) => {
     )
     .subscribe();
 };
+
+// Obtener historial de entradas de un producto
+export const getStockEntriesByProduct = async (productId) => {
+  const { data, error } = await supabase
+    .from("stock_entries")
+    .select(
+      `
+      *,
+      sabores (
+        id,
+        nombre
+      ),
+      products (
+        id,
+        nombre_product,
+        prc_menudeo,
+        cant_paquete
+      )
+    `
+    )
+    .eq("product_id", productId)
+    .order("created_at", { ascending: false });
+
+  if (error) throw error;
+  return data;
+};

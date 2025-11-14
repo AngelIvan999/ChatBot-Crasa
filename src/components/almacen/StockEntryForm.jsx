@@ -134,7 +134,7 @@ export default function StockEntryForm({
               required
             />
             <small className="input-hint">
-              Número de cajas que ingresan al almacén
+              Número de cajas que ingresan al almacen
             </small>
           </div>
 

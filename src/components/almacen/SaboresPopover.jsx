@@ -28,7 +28,7 @@ export default function SaboresPopover({ saboresData, productoNombre }) {
     };
   }, [showPopover]);
 
-  // Ajustar posición del popover después de renderizar
+  // Ajustar posición del popover despues de renderizar
   useEffect(() => {
     if (showPopover && popoverRef.current && containerRef.current) {
       const containerRect = containerRef.current.getBoundingClientRect();
