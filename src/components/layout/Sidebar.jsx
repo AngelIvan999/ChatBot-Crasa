@@ -14,7 +14,7 @@ import {
 
 export default function Sidebar({ currentPage, onPageChange }) {
   const [showMenu, setShowMenu] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const { cerrarSesion } = useAuthStore();
   const navigate = useNavigate();
 
