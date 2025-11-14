@@ -14,7 +14,8 @@ export const getSalesStats = async () => {
 
   const { count: activeChats, error: chatsError } = await supabase
     .from("users")
-    .select("*", { count: "exact", head: true })
+    .select("*, chat_history(*)", { count: "exact", head: true })
+    .not("chat_history", "is", null)
     .gte("last_seen_at", thirtyDaysAgo.toISOString());
 
   if (chatsError) throw chatsError;
