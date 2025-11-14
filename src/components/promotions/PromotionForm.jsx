@@ -51,7 +51,7 @@ export default function PromotionForm({ onClose }) {
           </div>
 
           <div className="form-group">
-            <label htmlFor="image">Imagen de la Promoción</label>
+            <label htmlFor="image">Imagen de la Promocion</label>
             <div className="image-upload">
               <input
                 type="file"
