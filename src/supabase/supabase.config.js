@@ -12,7 +12,8 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export const getUsers = async () => {
   const { data, error } = await supabase
     .from("users")
-    .select("*")
+    .select("*, chat_history(*)")
+    .not("chat_history", "is", null)
     .order("last_seen_at", { ascending: false });
 
   if (error) throw error;
