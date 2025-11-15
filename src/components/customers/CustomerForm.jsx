@@ -138,7 +138,7 @@ export default function CustomerForm({ customer, onClose, onSuccess }) {
           </div>
 
           <div className="form-group">
-            <label htmlFor="phone">Número de Telefono *</label>
+            <label htmlFor="phone">Numero de Telefono *</label>
             <div className="phone-input-container">
               <span className="phone-prefix">+52</span>
               <input

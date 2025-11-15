@@ -38,7 +38,7 @@ export default function CustomerList({ customers, loading, onEdit, onDelete }) {
   };
 
   const formatPhone = (phone) => {
-    // Mostrar el número sin el prefijo 521
+    // Mostrar el numero sin el prefijo 521
     if (phone.startsWith("521")) {
       const number = phone.substring(3);
       return `+52 ${number.substring(0, 3)} ${number.substring(

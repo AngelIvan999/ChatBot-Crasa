@@ -5,7 +5,7 @@ export default function ChatMenu({ user, onUserBlocked }) {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
-  // Cerrar menú al hacer clic fuera
+  // Cerrar menu al hacer clic fuera
   useEffect(() => {
     function handleClickOutside(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {

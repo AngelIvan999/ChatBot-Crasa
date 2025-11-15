@@ -106,7 +106,7 @@ export default function StockHistoryPage() {
           <div className="empty-state">
             <div className="empty-icon">📦</div>
             <h2>Sin entradas registradas</h2>
-            <p>Aún no hay entradas de stock para este producto</p>
+            <p>Aun no hay entradas de stock para este producto</p>
           </div>
         ) : (
           <div className="sabores-sections">

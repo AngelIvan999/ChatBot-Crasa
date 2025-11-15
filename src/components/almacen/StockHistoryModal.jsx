@@ -71,7 +71,7 @@ export default function StockHistoryModal({ product, onClose }) {
         <div className="empty-state">
           <div className="empty-icon">📦</div>
           <h3>Sin entradas registradas</h3>
-          <p>Aún no hay entradas de stock para este producto</p>
+          <p>Aun no hay entradas de stock para este producto</p>
         </div>
       ) : (
         <div className="sabores-sections">

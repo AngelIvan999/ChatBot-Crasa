@@ -20,7 +20,7 @@ export default function UserInfo({ user }) {
         <p className="user-phone">{user.phone}</p>
         {user.last_seen_at && (
           <p className="user-last-seen">
-            Última actividad:{" "}
+            Ultima actividad:{" "}
             {formatDistanceToNow(new Date(user.last_seen_at), {
               addSuffix: true,
               locale: es,

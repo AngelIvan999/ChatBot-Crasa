@@ -55,7 +55,7 @@ export default function DashboardPage() {
           title: "Conversaciones Activas",
           value: String(data.activeChats),
           icon: "💬",
-          trend: "Último mes",
+          trend: "Ultimo mes",
           trendUp: true,
         },
         {
