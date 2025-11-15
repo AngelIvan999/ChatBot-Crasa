@@ -286,7 +286,7 @@ export default function ProductForm({
                   className="btn-primary"
                   onClick={handleCreateNewSabor}
                 >
-                  ✅ Crear Sabor
+                  Crear Sabor
                 </button>
               </div>
             </div>
