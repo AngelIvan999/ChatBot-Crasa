@@ -4,12 +4,14 @@ import StockEntryForm from "../components/almacen/StockEntryForm";
 import AlmacenList from "../components/almacen/AlmacenList";
 import { useAlmacen } from "../hooks/useAlmacen";
 import Modal from "../components/common/Modal";
+import InvoiceUploader from "../components/almacen/InvoiceUploader";
 
 export default function AlmacenPage() {
   const [showProductForm, setShowProductForm] = useState(false);
   const [showEntryForm, setShowEntryForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const { almacen, sabores, loading, error, refreshAlmacen } = useAlmacen();
+  const [showInvoiceUploader, setShowInvoiceUploader] = useState(false);
 
   const handleEdit = (product) => {
     setEditingProduct(product);
@@ -48,6 +50,13 @@ export default function AlmacenPage() {
         </div>
         <div style={{ display: "flex", gap: "12px" }}>
           <button
+            className="btn-primary"
+            onClick={() => setShowInvoiceUploader(true)}
+            style={{ background: "#f59e0b" }}
+          >
+            📄 Cargar Factura
+          </button>
+          <button
             className="btn-secondary"
             onClick={() => setShowEntryForm(true)}
           >
@@ -84,6 +93,17 @@ export default function AlmacenPage() {
           products={almacen}
           sabores={sabores}
           onClose={() => setShowEntryForm(false)}
+          onSuccess={handleSuccess}
+        />
+      </Modal>
+
+      <Modal
+        isOpen={showInvoiceUploader}
+        onClose={() => setShowInvoiceUploader(false)}
+        size="large"
+      >
+        <InvoiceUploader
+          onClose={() => setShowInvoiceUploader(false)}
           onSuccess={handleSuccess}
         />
       </Modal>

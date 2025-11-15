@@ -25,6 +25,7 @@ export default function ProductForm({
   const [newSaborName, setNewSaborName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [saboresCodigos, setSaboresCodigos] = useState({});
 
   useEffect(() => {
     if (product) {
@@ -98,6 +99,13 @@ export default function ProductForm({
     );
   };
 
+  const handleCodigoChange = (saborId, codigo) => {
+    setSaboresCodigos((prev) => ({
+      ...prev,
+      [saborId]: codigo,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -149,6 +157,13 @@ export default function ProductForm({
         // Crear relaciones de sabores
         for (const saborId of selectedSabores) {
           await createProductoSabor(savedProduct.id, saborId);
+        }
+
+        for (const saborId of selectedSabores) {
+          const codigo = saboresCodigos[saborId];
+          if (codigo) {
+            await updateProductoSaborCodigo(savedProduct.id, saborId, codigo);
+          }
         }
       }
 
@@ -243,6 +258,38 @@ export default function ProductForm({
                 </label>
               ))}
             </div>
+
+            <div className="sabores-grid">
+              {saboresDisponibles.map((sabor) => {
+                const isSelected = selectedSabores.includes(sabor.id);
+                const codigoActual = saboresCodigos[sabor.id] || "";
+
+                return (
+                  <div key={sabor.id} className="sabor-checkbox-wrapper">
+                    <label className="sabor-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={() => handleSaborToggle(sabor.id)}
+                      />
+                      <span>{sabor.nombre}</span>
+                    </label>
+                    {isSelected && (
+                      <input
+                        type="text"
+                        className="sabor-codigo-input"
+                        placeholder="Código"
+                        value={codigoActual}
+                        onChange={(e) =>
+                          handleCodigoChange(sabor.id, e.target.value)
+                        }
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
             <small className="input-hint">
               Selecciona al menos un sabor para este producto
             </small>

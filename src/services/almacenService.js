@@ -165,3 +165,59 @@ export const getStockEntriesByProduct = async (productId) => {
   if (error) throw error;
   return data;
 };
+
+export const registrarEntradaDesdeFactura = async (facturaData) => {
+  const { getProductoByCodigo } = await import("./productService");
+
+  const errores = [];
+  const exitosos = [];
+
+  for (const producto of facturaData.productos) {
+    try {
+      // Buscar producto por código
+      const productoSabor = await getProductoByCodigo(producto.codigo);
+
+      if (!productoSabor) {
+        errores.push({
+          codigo: producto.codigo,
+          descripcion: producto.descripcion,
+          error: "Código no encontrado en el sistema",
+        });
+        continue;
+      }
+
+      // Registrar entrada
+      await registrarEntrada({
+        product_id: productoSabor.product_id,
+        sabor_id: productoSabor.sabor_id,
+        cantidad: producto.cantidad,
+      });
+
+      exitosos.push({
+        codigo: producto.codigo,
+        descripcion: producto.descripcion,
+        cantidad: producto.cantidad,
+      });
+    } catch (error) {
+      errores.push({
+        codigo: producto.codigo,
+        descripcion: producto.descripcion,
+        error: error.message,
+      });
+    }
+  }
+
+  if (errores.length > 0) {
+    console.warn("Errores al procesar algunos productos:", errores);
+  }
+
+  if (exitosos.length === 0) {
+    throw new Error("No se pudo registrar ningún producto");
+  }
+
+  return {
+    exitosos,
+    errores,
+    total: facturaData.productos.length,
+  };
+};

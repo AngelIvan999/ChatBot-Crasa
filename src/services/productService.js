@@ -99,3 +99,33 @@ export const deleteProductoSabor = async (productId, saborId) => {
 
   if (error) throw error;
 };
+
+export const updateProductoSaborCodigo = async (productId, saborId, codigo) => {
+  const { data, error } = await supabase
+    .from("producto_sabores")
+    .update({ codigo: codigo })
+    .eq("product_id", productId)
+    .eq("sabor_id", saborId)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+};
+
+export const getProductoByCodigo = async (codigo) => {
+  const { data, error } = await supabase
+    .from("producto_sabores")
+    .select(
+      `
+      *,
+      products (*),
+      sabores (*)
+    `
+    )
+    .eq("codigo", codigo)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data;
+};
