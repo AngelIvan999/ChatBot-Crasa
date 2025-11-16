@@ -259,7 +259,8 @@ export default function ProductForm({
               ))}
             </div>
 
-            <div className="sabores-grid">
+            {/*
+              <div className="sabores-grid">
               {saboresDisponibles.map((sabor) => {
                 const isSelected = selectedSabores.includes(sabor.id);
                 const codigoActual = saboresCodigos[sabor.id] || "";
@@ -289,6 +290,7 @@ export default function ProductForm({
                 );
               })}
             </div>
+            */}
 
             <small className="input-hint">
               Selecciona al menos un sabor para este producto
