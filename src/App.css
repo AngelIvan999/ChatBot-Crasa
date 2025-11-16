@@ -2042,7 +2042,7 @@ body {
 }
 
 .modal-large {
-  width: 100%;
+  width: 60%;
   max-width: 1200px;
 }
 
@@ -2379,11 +2379,6 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 
 .modal-overlay::-webkit-scrollbar {
   display: none;
-}
-
-/* Ajustar contenido del modal */
-.modal-content {
-  padding: 40px 32px 32px 32px; /* Más padding arriba para el botón X */
 }
 
 /* Mejorar botón de cerrar modal */
@@ -3389,81 +3384,6 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   margin-top: 16px;
 }
 
-.extracted-data {
-  background: #f9fafb;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 16px;
-}
-
-.extracted-data h3 {
-  font-size: 18px;
-  color: #111827;
-  margin-bottom: 16px;
-}
-
-.data-summary {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-  padding: 16px;
-  background: white;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.data-summary p {
-  margin: 0;
-  font-size: 14px;
-  color: #374151;
-}
-
-.data-summary strong {
-  color: #111827;
-  font-weight: 600;
-}
-
-.products-preview h4 {
-  font-size: 16px;
-  color: #111827;
-  margin-bottom: 12px;
-}
-
-.products-list {
-  max-height: 300px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.product-item {
-  display: grid;
-  grid-template-columns: 100px 1fr 120px;
-  gap: 12px;
-  padding: 12px;
-  background: white;
-  border-radius: 8px;
-  font-size: 13px;
-  align-items: center;
-}
-
-.product-code {
-  font-weight: 600;
-  color: #3b82f6;
-  font-family: monospace;
-}
-
-.product-desc {
-  color: #374151;
-}
-
-.product-qty {
-  text-align: right;
-  font-weight: 600;
-  color: #059669;
-}
-
 /* Sabor codigo input */
 .sabor-checkbox-wrapper {
   display: flex;
@@ -3483,4 +3403,59 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Invoice Uploader - PDF Upload Area */
+.pdf-upload-label {
+  display: block;
+  cursor: pointer;
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s;
+  background: white;
+}
+
+.pdf-upload-label:hover {
+  border-color: #3b82f6;
+  background: #f9fafb;
+}
+
+.pdf-upload-label .upload-placeholder {
+  padding: 60px 24px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.pdf-upload-label .upload-icon {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.pdf-upload-label .upload-placeholder p {
+  margin: 8px 0;
+  font-size: 15px;
+  color: #374151;
+}
+
+.pdf-upload-label .upload-placeholder p:first-of-type {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.pdf-upload-label .upload-hint {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.pdf-preview-container {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.pdf-preview-container iframe {
+  border: none;
+  display: block;
 }

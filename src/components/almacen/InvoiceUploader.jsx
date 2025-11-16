@@ -155,66 +155,35 @@ export default function InvoiceUploader({ onSuccess, onClose }) {
       <h2>📄 Cargar Factura PDF</h2>
 
       <div className="upload-section">
-        <input
-          type="file"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          accept=".pdf"
-          style={{ display: "none" }}
-        />
-
-        <button
-          type="button"
-          className="btn-primary"
-          onClick={() => fileInputRef.current.click()}
-          disabled={isProcessing}
-        >
-          {isProcessing ? "⏳ Procesando..." : "📁 Seleccionar Factura PDF"}
-        </button>
-
-        {pdfPreview && (
-          <div className="pdf-preview">
-            <iframe
-              src={pdfPreview}
-              width="100%"
-              height="400px"
-              title="Vista previa de factura"
-            />
-          </div>
-        )}
-
-        {extractedData && (
-          <div className="extracted-data">
-            <h3>📊 Datos Extraídos</h3>
-            <div className="data-summary">
-              <p>
-                <strong>Pedido:</strong> {extractedData.pedidoNo || "N/A"}
-              </p>
-              <p>
-                <strong>Fecha:</strong> {extractedData.fecha || "N/A"}
-              </p>
-              <p>
-                <strong>Productos:</strong> {extractedData.cantidadProductos}
-              </p>
-              <p>
-                <strong>Total cajas:</strong> {extractedData.cantidadTotal}
-              </p>
-            </div>
-
-            <div className="products-preview">
-              <h4>Productos detectados ({extractedData.productos.length}):</h4>
-              <div className="products-list">
-                {extractedData.productos.map((prod, idx) => (
-                  <div key={idx} className="product-item">
-                    <span className="product-code">{prod.codigo}</span>
-                    <span className="product-desc">{prod.descripcion}</span>
-                    <span className="product-qty">{prod.cantidad} cajas</span>
-                  </div>
-                ))}
+        <div className="pdf-upload-area">
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept=".pdf"
+            className="file-input"
+            id="pdf-upload"
+          />
+          <label htmlFor="pdf-upload" className="pdf-upload-label">
+            {pdfPreview ? (
+              <div className="pdf-preview-container">
+                <iframe
+                  src={pdfPreview}
+                  width="100%"
+                  height="auto"
+                  title="Vista previa de factura"
+                />
               </div>
-            </div>
-          </div>
-        )}
+            ) : (
+              <div className="upload-placeholder">
+                <span className="upload-icon">📄</span>
+                <p>Arrastra tu factura PDF aquí</p>
+                <p className="upload-hint">o haz clic para seleccionar</p>
+                <p className="upload-hint">Archivos PDF hasta 10MB</p>
+              </div>
+            )}
+          </label>
+        </div>
       </div>
 
       <div className="form-actions">
