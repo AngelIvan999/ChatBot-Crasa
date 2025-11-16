@@ -101,6 +101,24 @@ export const deleteProductoSabor = async (productId, saborId) => {
 };
 
 export const updateProductoSaborCodigo = async (productId, saborId, codigo) => {
+  const { data: existing } = await supabase
+    .from("producto_sabores")
+    .select("id")
+    .eq("product_id", productId)
+    .eq("sabor_id", saborId)
+    .maybeSingle();
+
+  if (!existing) {
+    const { data, error } = await supabase
+      .from("producto_sabores")
+      .insert([{ product_id: productId, sabor_id: saborId, codigo: codigo }])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  }
+
   const { data, error } = await supabase
     .from("producto_sabores")
     .update({ codigo: codigo })

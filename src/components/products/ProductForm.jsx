@@ -6,6 +6,7 @@ import {
   createProductoSabor,
   deleteProductoSabor,
   createSabor,
+  updateProductoSaborCodigo,
 } from "../../services/productService";
 import Swal from "sweetalert2";
 
@@ -43,6 +44,15 @@ export default function ProductForm({
     try {
       const data = await getProductoSabores(product.id);
       setSelectedSabores(data.map((ps) => ps.sabor_id));
+
+      // Cargar códigos existentes
+      const codigosExistentes = {};
+      data.forEach((ps) => {
+        if (ps.codigo) {
+          codigosExistentes[ps.sabor_id] = ps.codigo;
+        }
+      });
+      setSaboresCodigos(codigosExistentes);
     } catch (error) {
       console.error("Error cargando sabores del producto:", error);
     }
@@ -129,6 +139,7 @@ export default function ProductForm({
       };
 
       let savedProduct;
+
       if (product) {
         // Actualizar producto existente
         savedProduct = await updateProduct(product.id, productData);
@@ -150,6 +161,14 @@ export default function ProductForm({
             await createProductoSabor(product.id, saborId);
           }
         }
+
+        // Actualizar códigos de todos los sabores seleccionados
+        for (const saborId of selectedSabores) {
+          const codigo = saboresCodigos[saborId];
+          if (codigo && codigo.trim() !== "") {
+            await updateProductoSaborCodigo(product.id, saborId, codigo.trim());
+          }
+        }
       } else {
         // Crear nuevo producto
         savedProduct = await createProduct(productData);
@@ -159,10 +178,15 @@ export default function ProductForm({
           await createProductoSabor(savedProduct.id, saborId);
         }
 
+        // Actualizar códigos para producto nuevo
         for (const saborId of selectedSabores) {
           const codigo = saboresCodigos[saborId];
-          if (codigo) {
-            await updateProductoSaborCodigo(savedProduct.id, saborId, codigo);
+          if (codigo && codigo.trim() !== "") {
+            await updateProductoSaborCodigo(
+              savedProduct.id,
+              saborId,
+              codigo.trim()
+            );
           }
         }
       }
@@ -246,20 +270,6 @@ export default function ProductForm({
 
           <div className="form-group">
             <label>Sabores disponibles *</label>
-            {/*
-            <div className="sabores-grid">
-              {saboresDisponibles.map((sabor) => (
-                <label key={sabor.id} className="sabor-checkbox">
-                  <input
-                    type="checkbox"
-                    checked={selectedSabores.includes(sabor.id)}
-                    onChange={() => handleSaborToggle(sabor.id)}
-                  />
-                  <span>{sabor.nombre}</span>
-                </label>
-              ))}
-            </div>
-            */}
 
             <div className="sabores-grid">
               {saboresDisponibles.map((sabor) => {
