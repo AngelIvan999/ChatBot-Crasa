@@ -3361,10 +3361,15 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 /* Invoice Uploader Styles */
+.invoice-uploader-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .invoice-uploader-wrapper h2 {
   font-size: 24px;
   color: #111827;
-  margin-bottom: 24px;
 }
 
 .upload-section {
