@@ -170,7 +170,7 @@ export default function InvoiceUploader({ onSuccess, onClose }) {
                 <iframe
                   src={pdfPreview}
                   width="100%"
-                  height="80%"
+                  height="400px"
                   title="Vista previa de factura"
                 />
               </div>
