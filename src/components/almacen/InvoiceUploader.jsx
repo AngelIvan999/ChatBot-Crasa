@@ -47,18 +47,6 @@ export default function InvoiceUploader({ onSuccess, onClose }) {
 
       const data = parseCrasaInvoice(fullText);
       setExtractedData(data);
-
-      Swal.fire({
-        icon: "success",
-        title: "Factura procesada",
-        html: `
-          <p><strong>Pedido:</strong> ${data.pedidoNo || "N/A"}</p>
-          <p><strong>Fecha:</strong> ${data.fecha || "N/A"}</p>
-          <p><strong>Productos:</strong> ${data.cantidadProductos}</p>
-          <p><strong>Total cajas:</strong> ${data.cantidadTotal}</p>
-        `,
-        timer: 3000,
-      });
     } catch (error) {
       console.error("Error procesando PDF:", error);
       Swal.fire({
