@@ -3361,10 +3361,6 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 /* Invoice Uploader Styles */
-.invoice-uploader-wrapper {
-  padding: 24px;
-}
-
 .invoice-uploader-wrapper h2 {
   font-size: 24px;
   color: #111827;
