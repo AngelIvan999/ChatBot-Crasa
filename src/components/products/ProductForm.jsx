@@ -246,6 +246,7 @@ export default function ProductForm({
 
           <div className="form-group">
             <label>Sabores disponibles *</label>
+            {/*
             <div className="sabores-grid">
               {saboresDisponibles.map((sabor) => (
                 <label key={sabor.id} className="sabor-checkbox">
@@ -258,9 +259,9 @@ export default function ProductForm({
                 </label>
               ))}
             </div>
+            */}
 
-            {/*
-              <div className="sabores-grid">
+            <div className="sabores-grid">
               {saboresDisponibles.map((sabor) => {
                 const isSelected = selectedSabores.includes(sabor.id);
                 const codigoActual = saboresCodigos[sabor.id] || "";
@@ -290,7 +291,6 @@ export default function ProductForm({
                 );
               })}
             </div>
-            */}
 
             <small className="input-hint">
               Selecciona al menos un sabor para este producto

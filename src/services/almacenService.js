@@ -16,7 +16,7 @@ export const getAlmacenCompleto = async () => {
       )
     `
     )
-    .order("created_at", { ascending: false });
+    .order("nombre_product", { ascending: true });
 
   if (productsError) throw productsError;
 
